@@ -1,4 +1,4 @@
-#import copy
+#importcopy
 # Define a function that takes in a state as a dictionary and returns True if the state meets the conditions and False if it does not
 def isValid(state):
     if state["wolf"] is not state["person"] and state["wolf"] == state["goat"]:
