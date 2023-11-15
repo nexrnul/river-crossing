@@ -11,7 +11,29 @@ def isValid(state):
 # Define a function that takes in a state as a dictionary and returns a list of all valid states that can be reached from 1 move of the input state
 # This function will need to call the function isValid(state)
 def get_next_states(state):
+    
+    next_state = []
+    same_side = []
 
+    for thing in state:
+            if state[thing] == state["person"] and thing is not "person":
+                same_side.appened(thing)
+
+    for thing in same_side:
+        next_state = copy.deepcopy(state)
+        next_state[thing] = not state[thing]
+        next_state["person"] = not state ["person"]
+
+        if isValid(next) == True:
+            next_states.append(next_state)
+    
+    persone_alone = copy.deepcopy(state)
+    person_alone["person"] = not state["person"]
+
+    if isValid(person_alone) == True:
+        next_states.append(person_alone)
+
+    return next_states
 
 # Define a recursive function that takes in a current_state and win_state and returns the path to those states using the Depth First Search algorithm
 # This function will need to call the function get_next_states(state), as well as itself
