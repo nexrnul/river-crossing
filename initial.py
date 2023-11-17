@@ -37,7 +37,18 @@ def get_next_states(state):
 
 # Define a recursive function that takes in a current_state and win_state and returns the path to those states using the Depth First Search algorithm
 # This function will need to call the function get_next_states(state), as well as itself
-def dfs(current_state, win_state):
+def dfs(present_state, win_state):
+    
+    if present_state == win_state:
+        return True
+    next_states = get_next_states(present_state)
+    past_states.append(present_state)
+
+    for state in next_state:
+        if not in past_states:
+            path.append(state)
+            if dfs(state, win_state) == True:
+                return True
     
     
 # Test your code! Does it solve the river crossing riddle?
