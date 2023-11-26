@@ -1,5 +1,5 @@
 import copy
-# Define a function that takes in a state as a dictionary and returns True if the state meets the conditions and False if it does not
+# define function taking in state as dictionary which returns True if state meets conditions and False if not
 def isValid(state):
     if state["wolf"] != state["person"] and state["wolf"] == state["goat"]:
         return False
@@ -7,9 +7,9 @@ def isValid(state):
         return False
     else:
         return True
-
-# Define a function that takes in a state as a dictionary and returns a list of all valid states that can be reached from 1 move of the input state
-# This function will need to call the function isValid(state)
+        
+# defines function taking in  state as dictionary, returns list of all valid states reachable from 1move of input state
+# function needs to call isValid(state)
 def get_next_states(state):
     
     next_states = []
@@ -35,8 +35,8 @@ def get_next_states(state):
 
     return next_states
 
-# Define a recursive function that takes in a current_state and win_state and returns the path to those states using the Depth First Search algorithm
-# This function will need to call the function get_next_states(state), as well as itself
+# define recursive function taking in current_state/win_state and returns path to those states by using Depth First Search (DFS) algorithm
+# function will need to call get_next_states(state), as well as itself
 def dfs(present_state, win_state):
 
     if present_state == win_state:
@@ -50,9 +50,8 @@ def dfs(present_state, win_state):
             if dfs(state, win_state) == True:
                 return True
             path.pop()
-    
-    
-# Test your code! Does it solve the river crossing riddle?
+
+# test 
 initial_state = {
     "wolf": False,
     "goat": False,
@@ -69,6 +68,13 @@ win_state = {
 
 past_states = [initial_state]
 path = []
+
+from termcolor import colored
+def print_colored(message, color_code):
+    #colored_message = f'<span style="color: \x1b[{color_code}m">{message}</span>'
+    colored_message = colored(message, color_code)
+    print(colored_message)
+print_colored("river crossing problem", 'light_blue')
 
 if dfs(initial_state, win_state):
     for index, step in enumerate(path):
