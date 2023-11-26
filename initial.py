@@ -1,9 +1,9 @@
-#importcopy
+import copy
 # Define a function that takes in a state as a dictionary and returns True if the state meets the conditions and False if it does not
 def isValid(state):
-    if state["wolf"] is not state["person"] and state["wolf"] == state["goat"]:
+    if state["wolf"] != state["person"] and state["wolf"] == state["goat"]:
         return False
-    elif state["goat"] is not state["person"] and state["goat"] == state["cabbage"]:
+    elif state["goat"] != state["person"] and state["goat"] == state["cabbage"]:
         return False
     else:
         return True
@@ -12,22 +12,22 @@ def isValid(state):
 # This function will need to call the function isValid(state)
 def get_next_states(state):
     
-    next_state = []
+    next_states = []
     same_side = []
 
     for thing in state:
-            if state[thing] == state["person"] and thing is not "person":
-                same_side.appened(thing)
+            if state[thing] == state["person"] and thing != "person":
+                same_side.append(thing)
 
     for thing in same_side:
         next_state = copy.deepcopy(state)
         next_state[thing] = not state[thing]
         next_state["person"] = not state ["person"]
 
-        if isValid(next) == True:
+        if isValid(next_state) == True:
             next_states.append(next_state)
     
-    persone_alone = copy.deepcopy(state)
+    person_alone = copy.deepcopy(state)
     person_alone["person"] = not state["person"]
 
     if isValid(person_alone) == True:
@@ -41,7 +41,7 @@ def dfs(present_state, win_state):
 
     if present_state == win_state:
         return True
-    next_states = get_next_states(present_state)
+    next_state = get_next_states(present_state)
     past_states.append(present_state)
 
     for state in next_state:
@@ -49,7 +49,7 @@ def dfs(present_state, win_state):
             path.append(state)
             if dfs(state, win_state) == True:
                 return True
-            paht.pop()
+            path.pop()
     
     
 # Test your code! Does it solve the river crossing riddle?
@@ -67,7 +67,7 @@ win_state = {
     "person": True
 }
 
-visited_states = [initial_state]
+past_states = [initial_state]
 path = []
 
 if dfs(initial_state, win_state):
